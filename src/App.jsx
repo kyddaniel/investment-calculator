@@ -1,6 +1,20 @@
+import Header from "./components/Header";
+import Parameters from "./components/Parameters";
+import Calculation from "./components/Calculation";
+
 function App() {
   return (
-    <h1>React Investment Calculator</h1>
+    <main>
+      <div id="header">
+        <Header/>
+      </div>
+      <div id="user-input">
+        <Parameters />
+      </div>
+      <div id="result">
+        <Calculation />
+      </div>
+    </main>
   )
 }
 
