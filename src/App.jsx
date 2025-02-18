@@ -44,11 +44,10 @@ function App() {
   return (
     <main>
       <Header/>
-      <div id="user-input">
-        <Parameters 
-          initialData={ DATA }
-          updateParameter={handleParameterUpdate} />
-      </div>
+      <Parameters 
+        initialData={ DATA }
+        updateParameter={handleParameterUpdate}
+      />
       <div id="result">
         <Calculation initInvest={calculatedData.initInvest} annualInvest={calculatedData.annualInvest} expextedReturn={calculatedData.expextedReturn} duration={calculatedData.duration} annualData={ annualData } />
       </div>
