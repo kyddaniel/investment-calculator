@@ -43,9 +43,7 @@ function App() {
 
   return (
     <main>
-      <div id="header">
-        <Header/>
-      </div>
+      <Header/>
       <div id="user-input">
         <Parameters 
           initialData={ DATA }
