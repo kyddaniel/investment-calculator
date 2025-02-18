@@ -2,17 +2,57 @@ import Header from "./components/Header";
 import Parameters from "./components/Parameters";
 import Calculation from "./components/Calculation";
 
+import { calculateInvestmentResults } from "./util/investment";
+
+import { useState } from "react";
+
 function App() {
+
+  const DATA = {
+    "initInvest" : 0,
+    "annualInvest" : 0,
+    "expextedReturn" : 0,
+    "duration" : 0
+  }
+
+  const [ calculatedData, setCalculatedData ] = useState({
+    "initInvest" : 0,
+    "annualInvest" : 0,
+    "expextedReturn" : 0,
+    "duration" : 0
+  });
+
+  function handleParameterUpdate(dataType, newValue) {
+    console.log("handleParameterUpdate", dataType, newValue);
+    setCalculatedData(data => {
+      return {
+        ...data,
+        [dataType] : newValue
+      }
+    });
+  }
+
+  console.log(calculatedData);
+  const annualData = calculateInvestmentResults({
+    initialInvestment : calculatedData.initInvest,
+    annualInvestment : calculatedData.annualInvest,
+    expectedReturn : calculatedData.expextedReturn,
+    duration : calculatedData.duration
+  });
+  console.log(annualData);
+
   return (
     <main>
       <div id="header">
         <Header/>
       </div>
       <div id="user-input">
-        <Parameters />
+        <Parameters 
+          initialData={ DATA }
+          updateParameter={handleParameterUpdate} />
       </div>
       <div id="result">
-        <Calculation />
+        <Calculation initInvest={calculatedData.initInvest} annualInvest={calculatedData.annualInvest} expextedReturn={calculatedData.expextedReturn} duration={calculatedData.duration} annualData={ annualData } />
       </div>
     </main>
   )
