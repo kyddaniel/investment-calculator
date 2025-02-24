@@ -23,16 +23,16 @@ function App() {
   });
 
   function handleParameterUpdate(dataType, newValue) {
-    console.log("handleParameterUpdate", dataType, newValue);
+    //console.log("handleParameterUpdate", dataType, newValue);
     setCalculatedData(data => {
       return {
         ...data,
-        [dataType] : newValue
+        [dataType] : +newValue // "+" convert the type to number, default is "string" if it is retrieved from <input>
       }
     });
   }
 
-  console.log(calculatedData);
+  //console.log(calculatedData);
   const annualData = calculateInvestmentResults({
     initialInvestment : calculatedData.initInvest,
     annualInvestment : calculatedData.annualInvest,
