@@ -9,16 +9,16 @@ import { useState } from "react";
 function App() {
 
   const DATA = {
-    "initInvest" : 0,
-    "annualInvest" : 0,
-    "expextedReturn" : 0,
+    "initialInvestment" : 0,
+    "annualInvestment" : 0,
+    "expectedReturn" : 0,
     "duration" : 0
   }
 
   const [ calculatedData, setCalculatedData ] = useState({
-    "initInvest" : 0,
-    "annualInvest" : 0,
-    "expextedReturn" : 0,
+    "initialInvestment" : 0,
+    "annualInvestment" : 0,
+    "expectedReturn" : 0,
     "duration" : 0
   });
 
@@ -34,12 +34,14 @@ function App() {
 
   //console.log(calculatedData);
   const annualData = calculateInvestmentResults({
-    initialInvestment : calculatedData.initInvest,
-    annualInvestment : calculatedData.annualInvest,
-    expectedReturn : calculatedData.expextedReturn,
+    initialInvestment : calculatedData.initialInvestment,
+    annualInvestment : calculatedData.annualInvestment,
+    expectedReturn : calculatedData.expectedReturn,
     duration : calculatedData.duration
   });
   console.log(annualData);
+
+  const inputIsValid = calculatedData.duration >= 1;
 
   return (
     <main>
@@ -48,9 +50,8 @@ function App() {
         initialData={ DATA }
         updateParameter={handleParameterUpdate}
       />
-      <div id="result">
-        <Calculation initInvest={calculatedData.initInvest} annualInvest={calculatedData.annualInvest} expextedReturn={calculatedData.expextedReturn} duration={calculatedData.duration} annualData={ annualData } />
-      </div>
+      { !inputIsValid && <p className="center">Please enter a duration greater than 0.</p> }
+      { inputIsValid && <Calculation calculatedData={ calculatedData } /> }
     </main>
   )
 }
